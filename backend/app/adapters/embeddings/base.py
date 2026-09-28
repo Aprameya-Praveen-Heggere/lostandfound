@@ -1,0 +1,13 @@
+from typing import Protocol
+
+class TextEmbeddingProvider(Protocol):
+    identity: str
+    version: str
+    def embed_text(self, text: str) -> list[float]: ...
+    def health(self) -> dict: ...
+
+class ImageEmbeddingProvider(Protocol):
+    identity: str
+    version: str
+    def embed_image(self, data: bytes) -> list[float]: ...
+    def health(self) -> dict: ...

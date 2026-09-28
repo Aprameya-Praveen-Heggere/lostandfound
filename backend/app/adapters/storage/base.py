@@ -1,0 +1,6 @@
+from typing import Protocol
+
+
+class StorageProvider(Protocol):
+    def save(self, data: bytes, suffix: str) -> str: ...
+    def path(self, stored_name: str): ...

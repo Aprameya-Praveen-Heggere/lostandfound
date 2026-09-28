@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+findora.db
+uploads/*
+!uploads/.gitkeep
+frontend/node_modules/
+frontend/dist/
+.coverage
+coverage.xml
+backend/coverage.xml
+backups/*.dump
