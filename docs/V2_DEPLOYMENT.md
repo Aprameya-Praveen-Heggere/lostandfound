@@ -7,3 +7,13 @@ Required core variables: `DATABASE_URL`, `SECRET_KEY`, `CORS_ORIGINS`, PostgreSQ
 Before V2 migration, back up PostgreSQL and uploads. Apply `alembic upgrade head` from `backend/`. Verify `/api/v1/ready`, provider health, login, matching, and private attachment access. No Redis, Kubernetes, or distributed bus is required.
 
 Unhandled exceptions and background-loop failures are emitted through Python's structured logging channel. Production deployments can attach an error-tracking logging handler without changing domain code; the default deployment does not send telemetry to an external vendor.
+
+## Explicit demo seed for a non-sensitive production demonstration
+
+Demo data is never created automatically when `ENVIRONMENT=production`. If a deployment intentionally needs the repository's public demo institution and accounts, open a trusted Render Shell after migrations complete and run:
+
+```bash
+python seed.py --confirm-production-demo-seed
+```
+
+The operation is idempotent: it creates missing demo records, preserves matching existing records, and aborts instead of overwriting a conflicting user, password, role, institution, or membership. Running it again creates nothing. These credentials are public and must not be used for a real institution or sensitive data.
